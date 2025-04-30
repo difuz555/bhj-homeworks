@@ -4,7 +4,7 @@ let dropdownLink = Array.from(document.getElementsByClassName('dropdown__link'))
 
 dropdownValue.forEach((element, index) => {
     element.addEventListener('click', function() {
-        dropdownList[index].classList.add('dropdown__list_active');
+        dropdownList[index].classList.toggle('dropdown__list_active');
     });
 });
 
