@@ -3,15 +3,12 @@ const btn = document.getElementById('tasks__add');
 const tasksList = document.getElementById('tasks__list');
 const tasksForm = document.getElementById('tasks__form');
 
-tasksForm.addEventListener('submit', e => {
+btn.addEventListener('click', (e) => {
     e.preventDefault();
-})
-
-btn.addEventListener('click', () => {
-    if (taskInput.value) {
+    if (taskInput.value.trim()) {
         let task = document.createElement('div');
         task.classList.add('task');
-        task.innerHTML = '<div class="task__title">' + taskInput.value + '</div><a href="#" class="task__remove">&times;</a>';
+        task.innerHTML = '<div class="task__title">' + taskInput.value.trim() + '</div><a href="#" class="task__remove">&times;</a>';
         tasksList.appendChild(task);
 
         let taskRemove = task.lastElementChild;
@@ -19,6 +16,8 @@ btn.addEventListener('click', () => {
             taskRemove.parentElement.remove();
         })
         
+        tasksForm.reset();
+    } else {
         tasksForm.reset();
     }
 })
