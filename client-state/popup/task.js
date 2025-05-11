@@ -1,11 +1,11 @@
 const closeModal = document.querySelector('.modal__close');
 const subscribeModal = document.getElementById('subscribe-modal');
 
-if (!document.cookie.includes('окно=закрыто')) {
+if (!document.cookie.includes('windowClose=true')) {
     subscribeModal.classList.add('modal_active');
 }
 
 closeModal.addEventListener('click', () => {
-    document.cookie = 'окно=закрыто';
+    document.cookie = 'windowClose=true';
     subscribeModal.classList.remove('modal_active');    
 })

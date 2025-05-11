@@ -4,10 +4,14 @@ const btn = document.getElementById('signin__btn');
 const welcome = document.getElementById('welcome');
 const userId = document.getElementById('user_id');
 
-if (localStorage.Id) {
+function welcomeWindowOpen() {
     welcome.classList.add('welcome_active');
-    userId.textContent = localStorage.Id;
+    userId.textContent = localStorage.getItem('Id');
     signin.classList.remove('signin_active');
+}
+
+if (localStorage.getItem('Id')) {
+    welcomeWindowOpen();
 }
 
 btn.addEventListener('click', (e) => {
@@ -15,21 +19,16 @@ btn.addEventListener('click', (e) => {
     const formData = new FormData(form);
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/auth');
+    xhr.responseType = 'json';
     xhr.send(formData);
     form.reset();
-    xhr.addEventListener('readystatechange', () => {
-        if (xhr.readyState == 4) {
-            if (JSON.parse(xhr.responseText).success) {
-                console.log(JSON.parse(xhr.responseText));
-                localStorage.Id = JSON.parse(xhr.responseText).user_id;
-                console.log(localStorage.Id);
-                welcome.classList.add('welcome_active');
-                userId.textContent = localStorage.Id;
-                signin.classList.remove('signin_active');
-            }
-            else {
-                window.alert('Неверный логин/пароль');
-            }
+    xhr.addEventListener('load', () => {        
+        if (xhr.response.success) {
+            localStorage.Id = xhr.response.user_id;
+            welcomeWindowOpen();
         }
+        else {
+            window.alert('Неверный логин/пароль');
+        }        
     })
 })
