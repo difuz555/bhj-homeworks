@@ -1,10 +1,10 @@
-let xhr = new XMLHttpRequest();
+const xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/slow-get-courses');
 xhr.onload = reqListener;
 xhr.send();
 
-let loaderImage = document.getElementById('loader');
-let items = document.getElementById('items');
+const loaderImage = document.getElementById('loader');
+const items = document.getElementById('items');
 
 function reqListener() {  
     let data = JSON.parse(this.responseText);

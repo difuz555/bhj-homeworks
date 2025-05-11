@@ -1,10 +1,10 @@
-let xhr = new XMLHttpRequest();
+const xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/poll');
 xhr.onload = reqListener;
 xhr.send();
 
-let pollTitle = document.getElementById('poll__title');
-let pollAnswers = document.getElementById('poll__answers');
+const pollTitle = document.getElementById('poll__title');
+const pollAnswers = document.getElementById('poll__answers');
 
 function reqListener() {  
     let data = JSON.parse(this.responseText);
